@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <link href='http://fonts.googleapis.com/css?family=Asap:400,300,700'
+    rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static',
+    filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row top-menu">
+            <div class="col-md-8">
+                <a href="{{url_for('showCars')}}">
+                <h1>Electric Cars </h1>
+                </a>
+            </div>
+            <div class="col-md-4 text-right ">
+            {% if 'username' not in session %}
+
+                <a href="{{url_for('showLogin')}}">
+                <span class="glyphicon glyphicon-log-in"></span>
+                    LogIn
+                </a>
+            {% else %}
+                <a href="{{url_for('logout')}}">
+                <span class="glyphicon glyphicon-log-out"></span>
+                    LogOut
+                </a>
+            {% endif %}
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

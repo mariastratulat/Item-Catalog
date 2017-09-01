@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row divider brown">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner menu">
+    <div class="col-md-11 col-md-offset-1 padding-none">
+        <h1>Edit Car</h1>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1 padding-top">
+        <form action="{{ url_for('editCar',car_id = car.id)}}" method = "post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type ="text" class="form-control" name="name" value="{{car.name }}">
+            <label for="name">Logo URL:</label>
+            <input type ="text" class="form-control" name="sign" value="{{car.sign }}">
+            <div class="padding-bottom"></div>
+            <button type="submit" class="btn btn-default" id="submit" type="submit">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
+            <a class="btn btn-default delete" href = '{{url_for('showCars')}}'>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cancel
+            </a>
+        </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

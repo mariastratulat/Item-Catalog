@@ -1,0 +1,90 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row divider brown">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner menu">
+        <div class="col-md-11 col-md-offset-1 padding-none">
+            <h1>{{ car.name }}
+            <figure class="creator">
+                <img src="{{ creator.picture}}">
+                <figcaption>{{ creator.name }}</figcaption>
+            </figure>
+            </h1>
+
+        </div>
+    </div>
+
+<div class = 'flash'>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li> <strong> {{ message }} </strong> </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+<div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-11 padding-none">
+        <a href="{{url_for('editCar', car_id = car.id )}}">
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                </span>Edit Car
+            </button>
+        </a>
+        <a href="{{url_for('addModel', car_id = car.id )}}">
+            <button class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Add Model
+            </button>
+        </a>
+        <a href="{{url_for('deleteCar', car_id = car.id )}}">
+            <button class="btn btn-default delete">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                Delete Car
+            </button>
+        </a>
+    </div>
+</div>
+{% if models !=[] %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <h2>Full electric</h2>
+            {% for m in models %}
+            {% if m.car_class == 'Electric' %}
+                <div class="models">
+                    <h3>{{m.name}}</h3>
+                    <p class="models-price">{{m.price}}</p>
+                    <p class="models-price">{{m.electric_range}}</p>
+                    <a href='{{url_for('editModel', car_id = car.id,
+                     model_id=m.id ) }}'>Edit</a> |
+                    <a href='{{url_for('deleteModel', car_id = car.id,
+                    model_id=m.id ) }}'>Delete</a>
+                </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+    <div class="col-md-5">
+        <h2>Hybrid</h2>
+            {% for m in models %}
+            {% if m.car_class == 'Hybrid' %}
+                <div class="models">
+                    <h3>{{m.name}}</h3>
+                    <p class="models-price">{{m.price}}</p>
+                    <p class="models-price">{{m.electric_range}}</p>
+                    <a href='{{url_for('editModel', car_id = car.id,
+                    model_id=m.id ) }}'>Edit</a> |
+                    <a href='{{url_for('deleteModel', car_id = car.id,
+                    model_id=m.id ) }}'>Delete</a>
+                </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{% endif %}
+{% endblock %}

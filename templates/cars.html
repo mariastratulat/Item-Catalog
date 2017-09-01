@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row divider brown">
+    <div class="col-md-12"></div>
+</div>
+<div class = "flash">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+<div class="row padding-top padding-bottom">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 padding-none">
+        <a href="{{url_for('addCar')}}">
+        <button class="btn btn-default">
+            <span class="glyphicon glyphicon-road" aria-hidden="true">
+            </span>Add Car
+        </button>
+        </a>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+        {% for car in cars %}
+        <a href = "{{url_for('showModels', car_id = car.id)}}">
+            <p class="title-sign">{{car.name}}</p>
+            <img class="img-responsive" src="{{car.sign}}">
+        </a>
+        {% endfor %}
+        </div>
+        <div class="col-md-5">
+            <h3 id="nytimes-header">New York Times Articles</h3>
+            <ul id="nytimes-articles"></ul>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+<!-- New York Times articles about electric cars -->
+<script type="text/javascript">
+    var $nytElem = $('#nytimes-articles');
+
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    url += '?' + $.param({
+        'api-key': "d2948b32598a45e3b1f79e13a19fde7d",
+        'q': "electric cars",
+        'sort': "newest"
+    });
+    $.ajax({
+        url: url,
+        method: 'GET',
+    }).done(function(result) {
+        console.log(result);
+        articles = result.response.docs;
+        for (var i = 0; i < articles.length; i++) {
+            var article = articles[i];
+            $nytElem.append('<li class="article">'+
+            '<a href="'+article.web_url+'">'+article.headline.main+'</a>'+
+                '<p>' + article.snippet + '</p>'+
+            '</li>');
+        };
+    }).fail(function(err) {
+    throw err;
+    });
+</script>
+{% endblock %}

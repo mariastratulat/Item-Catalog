@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="row divider brown">
+    <div class="col-md-12"></div>
+</div>
+<div class="row banner menu">
+    <div class="col-md-11 col-md-offset-1 padding-none">
+        <h1>Edit Model</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1 padding-top">
+        <form action="#" method = "post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type ="text" maxlength="100" class="form-control"
+                name="name" value="{{model.name }}">
+
+                <label for="electric_range">Electric range:</label>
+                <textarea class="form-control" maxlength="250" rows="2"
+                name="electric_range">{{model.electric_range}}</textarea>
+
+                <label for="price">Price:</label>
+                <div class="input-group">
+                    <div class="input-group-addon">$</div>
+                    <input type ="text" maxlength="10" class="form-control"
+                    name="price" value="{{model.price}}">
+                </div>
+
+                <label for="car_class">Electric:</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="car_class"
+                        value="Electric" {% if model.car_class == 'Electric'%}checked{%endif%}>Full electric
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="car_class"
+                    value="Hybrid" {% if model.car_class == 'Hybrid' %}checked{%endif%}>Hybrid
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default" id="submit"
+                type="submit">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                Save</button>
+                <a class="btn btn-default delete" href = '{{url_for('showCars')}}'>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                 Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
