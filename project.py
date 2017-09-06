@@ -347,6 +347,12 @@ def gconnect():
 
     data = answer.json()
 
+    # check if user exists
+    user_id = getUserID(login_session['email'])
+    if not user_id:
+        user_id = createUser(login_session)
+    login_session['user_id'] = user_id
+
     login_session['provider'] = 'google'
     login_session['username'] = data['name']
     login_session['picture'] = data['picture']
