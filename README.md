@@ -9,9 +9,9 @@ For running this application follow:
 
   - run *vagrant up* to start the Virtual Machine
   - run *vagrant ssh*
-  - run *cd vagrant/Item Catalog 
+  - run *cd vagrant/Item Catalog*
   - run *python database_setup.py* to create the database
   - run *python modelsinfo.py* to populate the database
   - run *python project.py* to start the application
   - go to [http://localhost:8000/] in your browser
-  
+

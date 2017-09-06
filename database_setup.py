@@ -41,7 +41,7 @@ class Model(Base):
     car_class = Column(String(80))
     electric_range = Column(String(250))
     car_id = Column(Integer, ForeignKey('car.id'))
-    car = relationship(Car)
+    car = relationship(Car, cascade="all, delete-orphan", single_parent=True,)  # added cascade option to relationship()
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
